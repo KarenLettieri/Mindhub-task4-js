@@ -1,39 +1,39 @@
-let query = location.search
-let params = new URLSearchParams(query)
-let idParams = params.get("id")
-
-let details = dataArray.find(info => info._id == idParams)
-
-
-
 function detailsCard(array) {
 
   const container = document.getElementById("container-detail")
-  let html = "";
 
-  html += `
-          <div class="row row-cols-2">
-          <div class="col-6">
-            <img src="${array.image}" class="img-fluid container-sm" >
+  array = array.map(element => {
+
+    return  `
+        <div class="col">
+              <div class="card h-100">
+                  <img src="${element.image}" class="card-img-top h-50">
+                  <div class="card-body">
+                      <h5 class="card-title">${element.name}</h5>
+                      <p class="card-text">${element.description}</p>
+                      <p class="card-text text-muted">Date: ${element.date}</p>
+                      <p class="text-muted card-text">Place: ${element.place}</p>
+                  </div>
+                  <div class="card-footer">
+                      <div class="container text-center">
+                          <div class="row">
+                              <div class="col">
+                                  <p class="text-muted fs-5 text-center">Price:$${element.price}</p>
+                                  </div>
+                              <div class="col">
+                              </div>
+                              <div class="col">
+                                  <a href="./templates/details.html?id=${element._id}" class="btn btn-secondary">More info</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
           </div>
-          <div class="col-lg-6">
-            <h1>${array.name}</h1>
-            <h3>${array.category}</h3>
-            <p> ${array.description}
-            </p>
+        `
+  })
 
-            <p> <span class="text-muted">Price: ${array.price}.</span>
-            </p>
-            <p> <span class="text-muted">Capacity: ${array.capacity}.</span>
-            
-            </p>
-            <p> <span class="text-muted">Place: ${array.place}.</span>
-            </p>
-            
-        </div>
-`
-
-  container.innerHTML = html
+  container.innerHTML += array.join('')
 
 
 }

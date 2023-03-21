@@ -3,7 +3,6 @@ let currentDate = ""
 
 const API_URL = "https://mindhub-xj03.onrender.com/api/amazing"
 
-
 async function getEvents() {
 
   try {
@@ -16,6 +15,13 @@ async function getEvents() {
     // Asignacion de la fecha tomada desde la API
     currentDate = eventsToCatch.currentDate
 
+    //Details
+    let query = location.search
+    let params = new URLSearchParams(query)
+    let idParams = params.get("id")
+    let details = dataArray.find(info => info._id == idParams)
+    console.log(details)   
+
     //Mapeo de eventos eliminando las categorias repetidas
     let mapEvents = dataArray.map(lista => lista.category);
     const dataA = new Set(mapEvents);
@@ -25,18 +31,15 @@ async function getEvents() {
 
     cards(dataArray)
     printChecks('#table_checks', dataArrayFiltrado)
-    detailsCard(details)
+    
 
   }
   catch (error) {
     console.log(error.message)
   }
-
-
 }
 
 getEvents()
-
 
 //Print de todas las cards de forma dinamica, usando un map
 function cards(array) {
@@ -60,7 +63,6 @@ function cards(array) {
                           <div class="row">
                               <div class="col">
                                   <p class="text-muted fs-5 text-center">Price:$${element.price}</p>
-                          
                                   </div>
                               <div class="col">
                               </div>
@@ -76,26 +78,19 @@ function cards(array) {
   })
 
   updateCard.innerHTML = array.join('')
-
 }
-
-
-
 
 //Print de todos los checks de forma dinamica, usando un map
 function printChecks(id_etiqueta, array_tipos) {
   let container = document.querySelector(id_etiqueta)
   array_tipos = array_tipos.map(each => {
     return `
-
     <div class="d-flex p-3 ms-5 gap-5"> 
     <fieldset>
     <input onclick="captureData()" class="form-check-input class_checks" type="checkbox" id="${each}" role="switch" id="flexSwitchCheckDefault" value="${each}">
     <label class="form-check-label" for="${each}">${each}</label>
     </fieldset>
-
     </div>
-  
     `
   })
   array_tipos.push(`<div class= "input-group mb-2 w-25 container">
@@ -104,7 +99,6 @@ function printChecks(id_etiqueta, array_tipos) {
   `)
   container.innerHTML = array_tipos.join('')
 }
-
 
 //Capturo los datos para realizar el filtro funcional
 
@@ -123,7 +117,6 @@ function captureData() {
   }
   else {
     notFound()
-
   }
 }
 
@@ -134,20 +127,55 @@ function notFound() {
   notFoundCard.innerHTML = `
         <div class="container text-center">
               <div class="card h-100">
-                  
                   <div class="card-body ">
                       <h5 class="card-title">Card not Found</h5>
                       <p class="card-text">Please try again</p>
-                      
                   </div>
-                  
-                   
               </div>
           </div>
         `
 }
 
 
+// function detailsCard(array) {
+
+//   const container = document.getElementById("container-detail")
+
+//   array = array.map(element => {
+
+//     return  `
+//         <div class="col">
+//               <div class="card h-100">
+//                   <img src="${element.image}" class="card-img-top h-50">
+//                   <div class="card-body">
+//                       <h5 class="card-title">${element.name}</h5>
+//                       <p class="card-text">${element.description}</p>
+//                       <p class="card-text text-muted">Date: ${element.date}</p>
+//                       <p class="text-muted card-text">Place: ${element.place}</p>
+//                   </div>
+//                   <div class="card-footer">
+//                       <div class="container text-center">
+//                           <div class="row">
+//                               <div class="col">
+//                                   <p class="text-muted fs-5 text-center">Price:$${element.price}</p>
+//                                   </div>
+//                               <div class="col">
+//                               </div>
+//                               <div class="col">
+//                                   <a href="./templates/details.html?id=${element._id}" class="btn btn-secondary">More info</a>
+//                               </div>
+//                           </div>
+//                       </div>
+//                   </div>
+//               </div>
+//           </div>
+//         `
+//   })
+
+//   container.innerHTML += array.join('')
+
+
+// }
 
 
 

@@ -21,24 +21,25 @@ async function getEvents() {
         let container = document.getElementById("container-detail")
 
         container.innerHTML += `
-             <div class="col">
-              <div class="card h-100">
-                  <img src="${dataArray[idParams-1].image}" class="card-img-top rounded mx-auto d-block">
-                  <div class="card-body">
-                      <h5 class="card-title">${dataArray[idParams-1].name}</h5>
-                      <p class="card-text">${dataArray[idParams-1].description}</p>
-                      <p class="card-text text-muted">Date: ${dataArray[idParams-1].date}</p>
-                      <p class="text-muted card-text">Place: ${dataArray[idParams-1].place}</p>
-                  </div>
-                  <div class="card-footer">
-                      <div class="container text-center">
-                          <div class="row">
-                            <p class="text-muted fs-5 text-center">Price:$${dataArray[idParams-1].price}</p>                                                  
-                        </div>
-                      </div>
-                  </div>
-              </div>
+          <div class="row row-cols-2">
+          <div class="col-6">
+            <img src="${dataArray[idParams-1].image}" class="img-fluid container-sm" >
           </div>
+          <div class="col-lg-6">
+            <h1>${dataArray[idParams-1].name}</h1>
+            <h3>${dataArray[idParams-1].category}</h3>
+            <p> ${dataArray[idParams-1].description}
+            </p>
+
+            <p> <span class="text-muted">Price: ${dataArray[idParams-1].price}.</span>
+            </p>
+            <p> <span class="text-muted">Capacity: ${dataArray[idParams-1].capacity}.</span>
+            
+            </p>
+            <p> <span class="text-muted">Place: ${dataArray[idParams-1].place}.</span>
+            </p>
+            
+        </div>
         `
 
     } catch (error) {

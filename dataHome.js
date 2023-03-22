@@ -15,12 +15,7 @@ async function getEvents() {
     // Asignacion de la fecha tomada desde la API
     currentDate = eventsToCatch.currentDate
 
-    //Details
-    let query = location.search
-    let params = new URLSearchParams(query)
-    let idParams = params.get("id")
-    let details = dataArray.find(info => info._id == idParams)
-    console.log(details)   
+       
 
     //Mapeo de eventos eliminando las categorias repetidas
     let mapEvents = dataArray.map(lista => lista.category);

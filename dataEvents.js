@@ -127,8 +127,7 @@ function printChecks(id_etiqueta, array_tipos) {
     container.innerHTML = array_tipos.join('')
 }
 
-//Llamamos a la funcion con el ID de los checks y las categorias filtradas sin repetir
-printChecks('#table_checks', dataArrayFiltrado)
+
 
 //Capturo los datos para realizar el filtro funcional
 
